@@ -5,7 +5,6 @@ class UsersController < ApplicationController
   
   def index
     @users = User.paginate(page: params[:page])
-    #@users = User.all
   end
   
   def new
@@ -16,34 +15,38 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
   
+  #ユーザーアカウントを作成
   def create
     @user = User.new(user_params)
     if @user.save
       log_in @user
-      flash[:success] = "Welcome to the Sample App!"
+      flash[:success] = "Dolphin Scuba Storeへようこそ"
       redirect_to @user
     else
       render 'new'
     end
   end
   
+  #ユーザープロフィールを編集
   def edit
     @user = User.find(params[:id])
   end
   
+  #編集したプロフィールを更新
   def update
     @user = User.find(params[:id])
     if @user.update_attributes(user_params)
-      flash[:success] = "Profile updated"
+      flash[:success] = "プロフィールを更新しました"
       redirect_to @user
     else
       render 'edit'
     end
   end
   
+  #ユーザーを削除(管理者のみ)
   def destroy
     User.find(params[:id]).destroy
-    flash[:success] = "User deleted"
+    flash[:success] = "ユーザーを削除しました"
     redirect_to users_url
   end
 
@@ -57,16 +60,19 @@ class UsersController < ApplicationController
     def logged_in_user
       unless logged_in?
         store_location
-        flash[:danger] = "Please log in."
+        flash[:danger] = "ログインしてください"
         redirect_to login_url
       end
     end
     
+    #現在閲覧しているユーザーページとログインしているユーザーが異なれば
+    #トップページへリダイレクトする
     def correct_user
       @user = User.find(params[:id])
       redirect_to(root_url) unless current_user?(@user)
     end
     
+    #管理者でなければトップページにリダイレクトする
     def admin_user
       redirect_to(root_url) unless current_user.admin?
     end
