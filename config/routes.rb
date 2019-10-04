@@ -1,5 +1,17 @@
 Rails.application.routes.draw do
   
+  get 'carts/show'
+
+  get 'carts/add_item'
+
+  get 'carts/update_item'
+
+  get 'carts/delete_item'
+
+  get 'carts/setup_cart_item'
+
+  get 'products/index'
+
   get 'sessions/new'
 
   resources :users
@@ -17,6 +29,14 @@ Rails.application.routes.draw do
   get    '/login',   to: 'sessions#new'
   post   '/login',   to: 'sessions#create'
   delete '/logout',  to: 'sessions#destroy'
+  
+  resources :products
+
+  resources :carts, only: [:show]
+
+  post '/add_item' => 'carts#add_item'
+  post '/update_item' => 'carts#update_item'
+  delete '/delete_item' => 'carts#delete_item'
   
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
