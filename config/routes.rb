@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   get 'carts/setup_cart_item'
 
   get 'products/index'
+  get 'products/new'
 
   get 'sessions/new'
 
@@ -31,8 +32,7 @@ Rails.application.routes.draw do
   delete '/logout',  to: 'sessions#destroy'
   
   resources :products
-
-  resources :carts, only: [:show]
+  resources :carts
 
   post '/add_item' => 'carts#add_item'
   post '/update_item' => 'carts#update_item'
