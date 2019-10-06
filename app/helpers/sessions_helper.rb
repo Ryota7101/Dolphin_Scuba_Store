@@ -7,6 +7,7 @@ module SessionsHelper
   def current_user
     if session[:user_id]
       @current_user ||= User.find_by(id: session[:user_id])
+      #debugger
     end
   end
   
@@ -17,6 +18,8 @@ module SessionsHelper
   def log_out
     session.delete(:user_id)
     @current_user = nil
+    session[:cart_id] = nil
+    debugger
   end
   
   def current_user?(user)
