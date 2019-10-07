@@ -21,6 +21,7 @@ class UsersController < ApplicationController
     if @user.save
       log_in @user
       flash[:success] = "Dolphin Scuba Storeへようこそ"
+      @user.create_cart #カートも作成する
       redirect_to @user
     else
       render 'new'

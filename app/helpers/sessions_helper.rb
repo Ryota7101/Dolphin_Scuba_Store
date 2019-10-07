@@ -19,7 +19,6 @@ module SessionsHelper
     session.delete(:user_id)
     @current_user = nil
     session[:cart_id] = nil
-    debugger
   end
   
   def current_user?(user)

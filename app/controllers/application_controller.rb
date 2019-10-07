@@ -8,7 +8,10 @@ class ApplicationController < ActionController::Base
   private
   
     def current_cart
-      #debugger
+      
+    end
+=begin
+    #debugger
       # sessionはハッシュのようにアクセスできる
       begin
         Cart.find(session[:cart_id])
@@ -20,17 +23,6 @@ class ApplicationController < ActionController::Base
         cart
         #debugger
       end
-    end
-=begin
-    if session[:cart_id]
-      cart = Cart.find(session[:cart_id])
-      debugger
-    else
-      cart = Cart.new
-      session[:cart_id] = cart.id
-      debugger
-    end
-  end
 =end
   
 end
