@@ -9,20 +9,18 @@ class ApplicationController < ActionController::Base
   
     def current_cart
       
+      
     end
 =begin
-    #debugger
-      # sessionはハッシュのようにアクセスできる
-      begin
-        Cart.find(session[:cart_id])
-        #debugger
-      rescue ActiveRecord::RecordNotFound
-        # 新しいカートを作成する(DBも書き込む)
-        cart = Cart.create
-        session[:cart_id] = cart.id
-        cart
-        #debugger
-      end
+    if session[:cart_id]
+      cart = Cart.find(session[:cart_id])
+      debugger
+    else
+      cart = Cart.new
+      session[:cart_id] = cart.id
+      debugger
+    end
+  end
 =end
   
 end
