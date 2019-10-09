@@ -28,13 +28,15 @@ class CartsController < ApplicationController
 =end
  
   def add_item
-    if @cart_item.blank?
+    if CartItem.find_by(product_id: params[:product_id], cart_id: @cart.id).blank?
+    #if @cart_item.blank?
+      debugger
       #追加した商品が初めてカートに入れるなら、cart_itemsを作成する
-      @cart.cart_items.build(product_id: params[:product_id])
+      @cart_item = @cart.cart_items.create(product_id: params[:product_id])
     end
     
     debugger
-    @cart_item.quantity += params[:quantity].to_i
+    @cart_item.quantity += params[:product][:quantity].to_i
     @cart_item.save
     redirect_to root_url
   end
@@ -59,7 +61,7 @@ class CartsController < ApplicationController
     
     #現在のユーザーが持つカートに入っている商品と個数を探す
     #todo カートid1に対して複数種類の商品がある場合に全て取り出しているか
-    @cart_item = CartItem.find_by(cart_id: @cart.id)
+    @cart_item = CartItem.find_by(cart_id: @cart.id,product_id: params[:product_id])
     debugger
     
     #@cart_item = current_cart.cart_items.find_by(product_id: params[:product_id])
