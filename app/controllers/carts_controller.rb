@@ -1,13 +1,17 @@
 class CartsController < ApplicationController
-  before_action :setup_cart_item!, only: [:add_item, :update_item, :delete_item]
+  before_action :setup_cart_item!, only: [:add_item, :update_item, :delete_item, :show]
 
   def show
     #@cart_items = current_cart.cart_items
     #debugger
-    @cart = Cart.find(params[:id])
-    @cart_items = CartItem.find_by(cart_id:@cart.id)
-    debugger
+    #debugger
+    #@cart = Cart.find(params[:id])
+    #@cart_items = CartItem.find_by(cart_id:@cart.id)
+    
     #@user  = User.find_by(id:@house.user_id)
+    @cart = Cart.find_by(user_id:current_user.id) #現在のユーザーが持つカートを探す
+    @cart_items = CartItem.where(cart_id: @cart.id)
+    
   end
 
   
@@ -35,9 +39,9 @@ class CartsController < ApplicationController
       @cart_item = @cart.cart_items.create(product_id: params[:product_id])
     end
     
-    debugger
+    
     @cart_item.quantity += params[:product][:quantity].to_i
-    @cart_item.save
+    @cart_item.save!
     redirect_to root_url
   end
 
@@ -62,7 +66,7 @@ class CartsController < ApplicationController
     #現在のユーザーが持つカートに入っている商品と個数を探す
     #todo カートid1に対して複数種類の商品がある場合に全て取り出しているか
     @cart_item = CartItem.find_by(cart_id: @cart.id,product_id: params[:product_id])
-    debugger
+    #debugger
     
     #@cart_item = current_cart.cart_items.find_by(product_id: params[:product_id])
   end
