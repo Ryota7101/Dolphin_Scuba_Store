@@ -6,10 +6,10 @@ class ApplicationController < ActionController::Base
   include SessionsHelper
   
   private
-  
+    
     def current_cart
-      
-      
+      @current_cart = Cart.find_by(user_id:current_user.id)
+      #@current_cart ||= User.find(session[:user_id]) if session[:user_id]
     end
 =begin
     if session[:cart_id]
