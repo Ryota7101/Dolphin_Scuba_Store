@@ -6,11 +6,17 @@ class CartsController < ApplicationController
     #debugger
     #debugger
     #@cart = Cart.find(params[:id])
-    #@cart_items = CartItem.find_by(cart_id:@cart.id)
-    
+    @cart_items = CartItem.where(cart_id:current_cart.id)
+    #debugger
     #@user  = User.find_by(id:@house.user_id)
     #@cart = Cart.find_by(user_id:current_user.id) #現在のユーザーが持つカートを探す
-    @cart_items = CartItem.where(cart_id: current_cart.id)
+    @total_price = 0
+    if @cart_items
+      @cart_items.each do |cart_item|
+        @total_price += cart_item.product.price * cart_item.quantity
+      end
+    end
+    
     
   end
 
@@ -27,7 +33,7 @@ class CartsController < ApplicationController
     
     @cart_item.quantity += params[:product][:quantity].to_i
     @cart_item.save!
-    redirect_to root_url
+    redirect_to current_cart
   end
 
 
@@ -38,7 +44,8 @@ class CartsController < ApplicationController
   end
 
   def delete_item
-    @cart_item.destroy
+    debugger
+    cart_item.destroy
     redirect_to current_cart
   end
 
