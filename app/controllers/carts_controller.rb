@@ -2,25 +2,14 @@ class CartsController < ApplicationController
   before_action :setup_cart_item!, only: [:add_item, :update_item, :delete_item, :show]
 
   def show
-    #@cart_items = current_cart.cart_items
-    #debugger
-    #debugger
-    #@cart = Cart.find(params[:id])
     @cart_items = CartItem.where(cart_id:current_cart.id)
-    #debugger
-    #@user  = User.find_by(id:@house.user_id)
-    #@cart = Cart.find_by(user_id:current_user.id) #現在のユーザーが持つカートを探す
     @total_price = 0
     if @cart_items
       @cart_items.each do |cart_item|
         @total_price += cart_item.product.price * cart_item.quantity
       end
     end
-    
-    
   end
-
-  
   
   # 商品一覧画面から、「商品購入」を押した時のアクション
  
@@ -59,14 +48,6 @@ class CartsController < ApplicationController
   private
 
   def setup_cart_item!
-    #@cart = Cart.find_by(user_id:current_user.id) #現在のユーザーが持つカートを探す
-    
-    #現在のユーザーが持つカートに入っている商品と個数を探す
-    #todo カートid1に対して複数種類の商品がある場合に全て取り出しているか
-    #debugger
     @cart_item = CartItem.find_by(cart_id: current_cart.id,product_id: params[:product_id])
-    #debugger
-    
-    #@cart_item = current_cart.cart_items.find_by(product_id: params[:product_id])
   end
 end

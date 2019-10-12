@@ -11,9 +11,13 @@ class OrdersController < ApplicationController
   end
 
   def create
-    @order = Order.new(order_params)
     debugger
+    @order = Order.new(order_params)
+    @cart_items = CartItem.where(cart_id:current_cart.id)
+    #@cart_item = current_cart.cart_items.create(product_id: params[:product_id])
+    #debugger
     #current_cart.delete
+    redirect_to current_cart
   end
 
   def destroy

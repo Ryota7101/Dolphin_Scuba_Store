@@ -18,7 +18,6 @@ class CartItemsController < ApplicationController
   private
 
     def setup_item
-      #@cart_item = CartItem.find_by(cart_id: current_cart.id,product_id: params[:product_id])
       @setup_item = CartItem.find(params[:id])
     end
 end
