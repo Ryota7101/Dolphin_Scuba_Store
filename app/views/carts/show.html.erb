@@ -21,3 +21,5 @@
 <% end %>
 
 <h2>合計金額:<%= @total_price %>円</h2>
+
+<%= button_to '注文をする', new_order_path, method: :get, class: 'fbtn' %>

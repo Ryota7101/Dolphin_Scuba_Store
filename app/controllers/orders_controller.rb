@@ -7,18 +7,13 @@ class OrdersController < ApplicationController
   end
 
   def new
-    @cart = current_cart
-  	if @cart.line_items.empty?
-  		redirect_to market_url, notice: 'カートは空です。'
-  		#return
-  	end
-  
   	@order = Order.new
   end
 
   def create
     @order = Order.new(order_params)
-    current_cart.delete
+    debugger
+    #current_cart.delete
   end
 
   def destroy

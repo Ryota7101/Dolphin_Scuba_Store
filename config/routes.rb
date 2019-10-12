@@ -40,6 +40,8 @@ Rails.application.routes.draw do
   resources :products
   resources :carts
   resources :cart_items
+  resources :orders
+  
 
   patch '/add_item' => 'carts#add_item'
   post '/update_item' => 'carts#update_item'

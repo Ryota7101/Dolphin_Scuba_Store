@@ -3,14 +3,14 @@ class CartItemsController < ApplicationController
   
   
   def destroy
-    debugger
+    #debugger
     @setup_item.destroy
     redirect_to current_cart
     
   end
 
   def delete_item
-    debugger
+    #debugger
     @setup_item.destroy
     redirect_to current_cart
   end

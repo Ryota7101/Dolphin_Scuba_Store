@@ -44,14 +44,14 @@ class CartsController < ApplicationController
   end
 
   def destroy
-    debugger
+    #debugger
     @cart_item.destroy
     redirect_to current_cart
     
   end
 
   def delete_item
-    debugger
+    #debugger
     @cart_item.destroy
     redirect_to current_cart
   end
@@ -63,6 +63,7 @@ class CartsController < ApplicationController
     
     #現在のユーザーが持つカートに入っている商品と個数を探す
     #todo カートid1に対して複数種類の商品がある場合に全て取り出しているか
+    #debugger
     @cart_item = CartItem.find_by(cart_id: current_cart.id,product_id: params[:product_id])
     #debugger
     
