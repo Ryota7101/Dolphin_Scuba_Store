@@ -43,9 +43,16 @@ class CartsController < ApplicationController
     redirect_to current_cart
   end
 
+  def destroy
+    debugger
+    @cart_item.destroy
+    redirect_to current_cart
+    
+  end
+
   def delete_item
     debugger
-    cart_item.destroy
+    @cart_item.destroy
     redirect_to current_cart
   end
 
