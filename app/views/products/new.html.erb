@@ -8,6 +8,9 @@
 
       <%= f.label :price %>
       <%= f.text_field :price, class: 'form-control' %>
+      
+      <%= f.label :picture %>
+      <%= f.file_field :picture, id: :product_picture %>
 
       <%= f.submit "商品登録", class: "btn btn-primary" %>
     <% end %>

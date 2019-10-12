@@ -2,6 +2,8 @@
 
 <%= @product.price %>
 
+<%= image_tag(@product.picture_url) if @product.picture.present? %>
+
 <%#= button_to 'カートに入れる', add_item_path(product_id: @product.id) %>
 
 <%#= form_for(@product,url: add_item_path(product_id: @product.id)) do |f| %>
