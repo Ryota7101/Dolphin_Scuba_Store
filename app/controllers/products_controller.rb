@@ -21,6 +21,20 @@ class ProductsController < ApplicationController
     end
   end
   
+  def edit
+    @product = Product.find(params[:id])
+  end
+  
+  def update
+    @product = Product.find(params[:id])
+    if @product.update_attributes(product_params)
+      flash[:success] = "更新しました"
+      redirect_to @product
+    else
+      render 'edit'
+    end
+  end
+  
   def ensure_correct_user
     if current_user.admin?
       #何もしない
@@ -30,10 +44,17 @@ class ProductsController < ApplicationController
     end
   end
   
+  def destroy
+    Product.find(params[:id]).destroy
+    flash[:success] = "商品を削除しました"
+    redirect_to products_path
+  end
+  
+  
   private
 
     def product_params
-      params.require(:product).permit(:name, :price)
-      params.require(:product).permit(:title, :memo, :author, :picture)
+      params.require(:product).permit(:name, :price, :title, :memo, :author, :picture)
+      #params.require(:product).permit(:title, :memo, :author, :picture)
     end
 end

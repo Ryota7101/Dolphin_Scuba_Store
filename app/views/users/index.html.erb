@@ -3,8 +3,10 @@
 <ul class="users">
   <% @users.each do |user| %>
     <li>
-      <%= gravatar_for user, size: 50 %>
+      <%= gravatar_for user %>
       <%= link_to user.name, user %>
+      <%= link_to "delete", user, method: :delete,
+                                  data: { confirm: "You sure?" } %>
     </li>
   <% end %>
 </ul>

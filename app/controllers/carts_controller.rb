@@ -6,12 +6,14 @@ class CartsController < ApplicationController
     @total_price = 0
     if @cart_items
       @cart_items.each do |cart_item|
+        #debugger
         @total_price += cart_item.product.price * cart_item.quantity
       end
     end
   end
  
-  def add_itemx
+  def add_item
+    
     if CartItem.find_by(product_id: params[:product_id], cart_id: current_cart.id).blank?
       #追加した商品が初めてカートに入れるなら、cart_itemsを作成する
       @cart_item = current_cart.cart_items.create(product_id: params[:product_id])

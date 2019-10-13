@@ -6,6 +6,8 @@
 <% else %>
   <% @cart_items.each do |cart_item| %>
     <tr class="cart_item">
+      <% pic = Product.find(cart_item.product_id) %>
+      <td text-align:center;><img height="80" src="<%=h pic.picture %>"/></td>
       <td><%= cart_item.product.name %></td>
       <td><%= cart_item.product.price %></td>
       <td><%= cart_item.quantity %></td>

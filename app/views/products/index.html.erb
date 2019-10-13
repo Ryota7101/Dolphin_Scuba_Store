@@ -1,6 +1,9 @@
 <h1>商品一覧</h1>
 <% @products.each do |product| %>
-    <li>
-      <%= link_to product.name, product %>
-    </li>
+    <tr>
+      <td text-align:center;><img height="80" src="<%=h product.picture %>"/></td>
+      <td><%= link_to product.name, product %><td>
+      <td><%= link_to "編集", edit_product_path(product), class: "btn btn-xs btn-primary" %><td>
+      <td><%= button_to '削除', product, method: :delete, data: {confirm: '商品を削除してよろしいですか？'}%><td>
+    </tr>
 <% end %>
