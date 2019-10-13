@@ -9,6 +9,7 @@ class CartsController < ApplicationController
         #debugger
         @total_price += cart_item.product.price * cart_item.quantity
       end
+      #debugger
     end
   end
  
@@ -18,7 +19,7 @@ class CartsController < ApplicationController
       #追加した商品が初めてカートに入れるなら、cart_itemsを作成する
       @cart_item = current_cart.cart_items.create(product_id: params[:product_id])
     end
-    
+
     @cart_item.quantity += params[:product][:quantity].to_i
     @cart_item.save!
     redirect_to current_cart

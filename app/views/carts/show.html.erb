@@ -4,6 +4,7 @@
 <% if @cart_items.blank? %>
   <h2>カートは空っぽです</h2>
 <% else %>
+<%# debugger %>
   <% @cart_items.each do |cart_item| %>
     <tr class="cart_item">
       <% pic = Product.find(cart_item.product_id) %>

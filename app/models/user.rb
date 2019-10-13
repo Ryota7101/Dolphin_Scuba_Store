@@ -7,4 +7,8 @@ class User < ApplicationRecord
   
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
   
+  def send_order_email
+    UserMailer.order_check(self).deliver_now
+  end
+  
 end
