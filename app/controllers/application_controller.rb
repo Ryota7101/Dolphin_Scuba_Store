@@ -8,26 +8,7 @@ class ApplicationController < ActionController::Base
   private
     
     def current_cart
-      #debugger
       @current_cart = Cart.find_by(user_id:current_user.id)
-      
-      #if @current_cart.nil?
-        #debugger
-       # @current_cart = Cart.create(user_id:current_user.id)
-      #end
-      
-      #@current_cart ||= User.find(session[:user_id]) if session[:user_id]
     end
-=begin
-    if session[:cart_id]
-      cart = Cart.find(session[:cart_id])
-      debugger
-    else
-      cart = Cart.new
-      session[:cart_id] = cart.id
-      debugger
-    end
-  end
-=end
   
 end

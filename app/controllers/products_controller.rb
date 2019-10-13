@@ -1,4 +1,8 @@
 class ProductsController < ApplicationController
+  before_action :ensure_correct_user, {only: [:new,
+                                              :create,
+                                              :edit,
+                                              :destroy]}
   def index
     @products = Product.all
   end
@@ -50,6 +54,14 @@ class ProductsController < ApplicationController
     redirect_to products_path
   end
   
+  def ensure_correct_user
+    if current_user.admin?
+      #何もしない
+    else
+      flash[:notice] = "アクセス権限がありません"
+      redirect_to root_url
+    end
+  end
   
   private
 

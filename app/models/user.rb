@@ -7,8 +7,10 @@ class User < ApplicationRecord
   
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
   
+  
   def send_order_email
-    UserMailer.order_check(self).deliver_now
+    cart_items = CartItem.where(cart_id:current_cart.id)
+    UserMailer.order_check(self,cart_items,11).deliver_now
   end
   
 end
