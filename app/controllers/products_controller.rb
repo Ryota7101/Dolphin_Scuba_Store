@@ -14,11 +14,9 @@ class ProductsController < ApplicationController
   def create
     @product = Product.new(product_params)
     if @product.save # => Validation
-      # Sucess
       flash[:success] = "商品を登録しました"
       redirect_to root_url
     else
-      # Failure
       render 'new'
     end
   end

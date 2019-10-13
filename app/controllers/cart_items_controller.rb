@@ -1,16 +1,7 @@
 class CartItemsController < ApplicationController
   before_action :setup_item, only: [:destroy]
-  
-  
-  def destroy
-    #debugger
-    @setup_item.destroy
-    redirect_to current_cart
-    
-  end
 
   def delete_item
-    #debugger
     @setup_item.destroy
     redirect_to current_cart
   end

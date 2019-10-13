@@ -10,12 +10,9 @@ class CartsController < ApplicationController
       end
     end
   end
-  
-  # 商品一覧画面から、「商品購入」を押した時のアクション
  
-  def add_item
+  def add_itemx
     if CartItem.find_by(product_id: params[:product_id], cart_id: current_cart.id).blank?
-    #if @cart_item.blank?
       #追加した商品が初めてカートに入れるなら、cart_itemsを作成する
       @cart_item = current_cart.cart_items.create(product_id: params[:product_id])
     end
@@ -25,22 +22,18 @@ class CartsController < ApplicationController
     redirect_to current_cart
   end
 
-
-  # カート詳細画面から、「更新」を押した時のアクション
   def update_item
     @cart_item.update(quantity: params[:quantity].to_i)
     redirect_to current_cart
   end
 
   def destroy
-    #debugger
     @cart_item.destroy
     redirect_to current_cart
     
   end
 
   def delete_item
-    #debugger
     @cart_item.destroy
     redirect_to current_cart
   end
