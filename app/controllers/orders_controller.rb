@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
   def index
-    @orders = Order.all
+    @orders = Order.where(user_id:current_user.id)
   end
 
   def show
@@ -11,8 +11,21 @@ class OrdersController < ApplicationController
   end
 
   def create
-    @order = Order.new(order_params)
     @cart_items = CartItem.where(cart_id:current_cart.id)
+    @order = Order.create(order_params)
+    #@order.add_items_to_order(current_cart)
+    @cart_items_order = @cart_items.clone
+    
+    
+    @cart_items_order.each do |item|
+      item.order_id = @order.id
+    end
+    debugger
+    @cart_items.each do |item|
+      item.clear
+    end
+    debugger
+    
     redirect_to current_cart
   end
 
