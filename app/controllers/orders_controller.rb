@@ -1,9 +1,10 @@
 class OrdersController < ApplicationController
   def index
-    @orders = Order.where(user_id:current_user.id)
+    @all_order_products = OrderProduct.all
   end
 
   def show
+    @order_products = OrderProduct.where(user_id:current_user.id)
   end
 
   def new
@@ -25,11 +26,13 @@ class OrdersController < ApplicationController
     
     #現在のユーザーのカートの中身をオーダー側へ移す
     @cart_items.each do |item|
-      @order_product = @order.create_order_product
+      @order_product = OrderProduct.create
+      @order_product.order_id = @order.id
       @order_product.user_id = current_user.id
       @order_product.product_id = item.product_id
       @order_product.quantity = item.quantity
       @order_product.price = item.product.price
+      @order_product.status = "Nyu-Kin-Machi"
       @order_product.save
     end
     
@@ -50,10 +53,6 @@ class OrdersController < ApplicationController
   
   
   private
-  
-    def set_order
-      @order = Order.find(params[:id])
-    end
 
     def order_params
       params.require(:order).permit(:name, :address, :email)
