@@ -4,9 +4,17 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <h1><%= @user.name %>様、example.comへようこそ。</h1>
+    <h1>Thank you <%= @user.name %></h1>
       
-    
-    <p>ご入会ありがとうございます。どうぞお楽しみくださいませ。</p>
+    <tr>
+      <% @cart_items.each do |cart_item| %>
+        <td>Product Name:<%= cart_item.product.name %></td>
+        <td>Product Price:<%= cart_item.product.price %></td>
+        <td>Product Quantity:<%= cart_item.quantity %></td>
+      <% end %>
+    </tr>
+
+
+    <p>Total Price:<%= @total_price %></p>
   </body>
 </html>
