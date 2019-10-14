@@ -1,22 +1,23 @@
-<h1>Carts#show</h1>
-
+<h1>カートの中身</h1>
 
 <% if @cart_items.blank? %>
-  <h2>カートは空っぽです</h2>
+  <h2>カートは空です</h2>
 <% else %>
-<%# debugger %>
+
+<ul class="users">
   <% @cart_items.each do |cart_item| %>
-    <tr class="cart_item">
+    <li>
       <% pic = Product.find(cart_item.product_id) %>
-      <td text-align:center;><img height="80" src="<%=h pic.picture %>"/></td>
-      <td><%= cart_item.product.name %></td>
-      <td><%= cart_item.product.price %></td>
-      <td><%= cart_item.quantity %></td>
-      <td><%= button_to '削除', cart_item, method: :delete, data: {confirm: 'カートから削除してよろしいですか？'}%><td>
-    </tr>
+      <img height="80" src="<%=h pic.picture %>"/>
+      <%= cart_item.product.name %>
+      <%= cart_item.product.price %>
+      <%= cart_item.quantity %>
+      <%= link_to '削除', cart_item, method: :delete, data: {confirm: 'カートから削除してよろしいですか？'}%>
+    </li>
   <% end %>
 <% end %>
+</ul>
 
 <h2>合計金額:<%= @total_price %>円</h2>
 
-<%= button_to '注文をする', new_order_path, method: :get, class: 'fbtn' %>
+<%= button_to '注文をする', new_order_path, method: :get, class: 'btn-square-shadow' %>

@@ -1,11 +1,11 @@
-<h1>商品一覧</h1>
+<h1>Product Index</h1>
 <% @products.each do |product| %>
-    <tr>
-      <td text-align:center;><img height="80" src="<%=h product.picture %>"/></td>
-      <td><%= link_to product.name, product %><td>
-      <td><%= link_to "編集", edit_product_path(product), class: "btn btn-xs btn-primary" %><td>
+    <ul class="users">
+      <li text-align:center;><img height="80" src="<%=h product.picture %>"/>
+      <%= link_to product.name, product %>
+      <%= link_to "編集", edit_product_path(product), class: "btn btn-xs btn-primary" %>
       <% if current_user.admin? %>
-        <td><%= button_to '削除', product, method: :delete, data: {confirm: '商品を削除してよろしいですか？'}%><td>
+        <%= link_to '削除', product, method: :delete, data: {confirm: '商品を削除してよろしいですか？'}%><li>
       <% end %>
-    </tr>
+    </ul>
 <% end %>
