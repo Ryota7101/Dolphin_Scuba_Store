@@ -23,8 +23,23 @@ class OrdersController < ApplicationController
       #debugger
     end
     
+    #現在のユーザーのカートの中身をオーダー側へ移す
+    @cart_items.each do |item|
+      @order_product = @order.create_order_product
+      @order_product.user_id = current_user.id
+      @order_product.product_id = item.product_id
+      @order_product.quantity = item.quantity
+      @order_product.price = item.product.price
+      @order_product.save
+    end
+    
+    #現在のユーザーのカートの中身を削除する
+    @cart_items.each do |item|
+      CartItem.delete(item.id)
+    end
+    
     UserMailer.order_check(current_user,@cart_items,@total_price).deliver_now
-    flash[:info] = "ご注文ありがとうございます。ご注文内容をメールで送信しました"
+    flash[:info] = "ご注文内容をメールで送信しました"
     redirect_to current_cart
   end
 
