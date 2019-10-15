@@ -1,13 +1,24 @@
-<h1><%= @product.name%></h1>
+<h2><%= @product.name%></h2>
 
 
-<%= @product.price %>
 
-<%= image_tag(@product.picture_url) if @product.picture.present? %>
-
-<%= form_for(@product,url: add_item_path(product_id: @product.id)) do |f| %>
-  <%= f.number_field :quantity, value: 1, class: 'form-control', min: 1 %>
-  <%= f.hidden_field :product_id, value: @product.id %>
-  <%= f.submit 'Add to Cart', class: 'btn btn-success' %>
-<% end %>
-      
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>商品画像</th>
+      <th>商品価格</th>
+      <th>個数</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= form_for(@product,url: add_item_path(product_id: @product.id)) do |f| %>
+      <tr>
+        <td><%= image_tag(@product.picture_url) if @product.picture.present? %></td>
+        <td><%= @product.price %>円</td>
+        <td><%= f.number_field :quantity, value: 1, class: 'form-control', min: 1 %></td>
+        <%= f.hidden_field :product_id, value: @product.id %>
+        <td><%= f.submit 'カートに入れる', class: 'btn btn-success' %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
