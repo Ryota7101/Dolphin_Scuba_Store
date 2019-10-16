@@ -22,7 +22,7 @@
           <td><%= order.created_at.strftime('%Y/%m/%d') %></td><!--注文日-->
           
           <td><!--注文内容-->
-          <% order.order_product.each do |order_product| %>
+          <% order.order_products.each do |order_product| %>
             [商品名:<%= Product.where(id:order_product.product_id).name %>]
             [商品価格:<%= order_product.price %>円]
             [購入個数:<%= order_product.quantity %>個]
@@ -31,20 +31,16 @@
           </td>
         
           <td><!--合計金額-->
-          <% order.order_product.each do |order_product| %>
+          <% order.order_products.each do |order_product| %>
             <% order_product.price %>
             <% order_product.quantity %>
             <% total_price += order_product.price*order_product.quantity %>
           <% end %>
           <%= total_price %>円
           </td>
-        
-        <td>status</td><!--注文ステータス-->
-        
+        <td><%= order.status %></td><!--注文ステータス-->
         </tr>
       <% end %>
-      
-     
   </tbody>
 </table>
 

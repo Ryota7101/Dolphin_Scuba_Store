@@ -44,8 +44,8 @@
           <% end %>
           <%= total_price %>円
           </td>
-        
-        <td>status</td><!--注文ステータス-->
+        <%#debugger%>
+        <td><%= link_to order.status, order_toggle_status_path(order), method: :patch %></td><!--注文ステータス-->
         
         </tr>
       <% end %>

@@ -21,7 +21,7 @@
         <td><img height="80" src="<%=h pic.picture %>"/></td>
         <td><%= cart_item.product.name %></td>
         <td><%= cart_item.product.price %>円</td>
-        <td><%= cart_item.quantity %></td>
+        <td><%= cart_item.quantity %>個</td>
         <td><%= link_to '削除', cart_item, method: :delete, class: "btn btn-xs btn-danger", data: {confirm: 'カートから削除してよろしいですか？'}%></td>
       </tr>
     <% end %>

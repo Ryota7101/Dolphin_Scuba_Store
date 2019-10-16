@@ -30,16 +30,7 @@ class CartsController < ApplicationController
     redirect_to current_cart
   end
 
-  def destroy
-    @cart_item.destroy
-    redirect_to current_cart
-    
-  end
-
-  def delete_item
-    @cart_item.destroy
-    redirect_to current_cart
-  end
+  
 
   private
 

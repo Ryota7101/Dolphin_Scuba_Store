@@ -36,7 +36,10 @@ Rails.application.routes.draw do
   resources :products
   resources :carts
   resources :cart_items
-  resources :orders
+  #resources :orders
+  resources :orders do
+    patch :toggle_status
+  end
   
   
 
