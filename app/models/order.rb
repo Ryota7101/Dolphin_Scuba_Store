@@ -1,6 +1,6 @@
 class Order < ApplicationRecord
   has_many :cart_item, dependent: :destroy
-  has_one :order_product
+  has_many :order_products
   has_one :users
   
   enum status: { waiting_for_payment: 0, waiting_for_shipping: 1,  shipment_complete: 2}

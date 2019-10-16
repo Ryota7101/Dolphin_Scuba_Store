@@ -1,13 +1,11 @@
 class OrdersController < ApplicationController
   def index
-    @all_order_products = OrderProduct.all
+    #@all_order_products = OrderProduct.all
+    @all_orders = Order.all
   end
 
   def show
-    #@order_products = current_order
-    #@order = current_order
     @order_products = OrderProduct.where(user_id:current_user.id)
-    #debugger
   end
 
   def new
@@ -20,7 +18,7 @@ class OrdersController < ApplicationController
     @order = Order.new(order_params)
     @order.user_id = current_user.id
     @order.save
-    
+  
     @total_price = 0
     if @cart_items
       @cart_items.each do |cart_item|
@@ -30,6 +28,7 @@ class OrdersController < ApplicationController
       #debugger
     end
     
+    debugger
     #現在のユーザーのカートの中身をオーダー側へ移す
     @cart_items.each do |item|
       @order_product = OrderProduct.create
@@ -38,9 +37,12 @@ class OrdersController < ApplicationController
       @order_product.product_id = item.product_id
       @order_product.quantity = item.quantity
       @order_product.price = item.product.price
-      @order_product.status = "Nyu-Kin-Machi"
-      @order_product.save
+      #@order_product.status = 0
+      @order_product.save!
+      debugger
     end
+    
+    debugger
     
     #現在のユーザーのカートの中身を削除する
     @cart_items.each do |item|
