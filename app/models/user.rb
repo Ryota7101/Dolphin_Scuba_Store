@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   has_one :cart #ユーザーとカートを関連つけるために追加
+  has_many :orders
   
   validates :name, presence: true
   validates :email, presence: true, uniqueness: true

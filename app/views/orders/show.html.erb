@@ -1,24 +1,61 @@
-<h1>あなたの注文履歴です</h1>
+<h2>あなたの注文履歴です</h2>
 
 <% if @order_products.blank? %>
   <h2>注文履歴はありません</h2>
 <% else %>
 
-<% total_price = 0 %>
-<ul class="users">
-  <% @order_products.each do |order_product| %>
-    <li>
-      <% pic = Product.find(order_product.product_id) %>
-      <img height="80" src="<%=h pic.picture %>"/>
-      <%# debugger%>
-      商品名:<%= Product.where(id:order_product.product_id).name %>
-      商品価格:<%= order_product.price %>
-      個数<%= order_product.quantity %>
-      <% total_price += order_product.price*order_product.quantity %>
-    </li>
-  <% end %>
-  <p>合計金額 : <%= total_price %>円</p>
-  <p>ステータス : </p>
-  
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>注文日</th>
+      <th>注文内容</th>
+      <th>商品金額</th>
+      <th>注文個数</th>
+      <th>合計金額</th>
+      <th>注文ステータス</th>
+    </tr>
+  </thead>
+  <tbody>
+      <% total_price = 0 %>
+      
+      <tr>
+        <td>20191011</td><!--注文日-->
+        
+        <td><!--注文内容-->
+        <% @order_products.each do |order_product| %>
+          <%= Product.where(id:order_product.product_id).name %>
+          <br>
+        <% end %>
+        </td>
+        
+        <td><!--商品金額-->
+        <% @order_products.each do |order_product| %>
+          <%= order_product.price %>円
+          <br>
+        <% end %>
+        </td>
+        
+        
+        <td><!--注文個数-->
+        <% @order_products.each do |order_product| %>
+          <%= order_product.quantity %>個
+          <br>
+        <% end %>
+        </td>
+        
+        <td><!--合計金額-->
+        <% @order_products.each do |order_product| %>
+          <% order_product.price %>
+          <% order_product.quantity %>
+          <% total_price += order_product.price*order_product.quantity %>
+        <% end %>
+        <%= total_price %>円
+        </td>
+        
+        <td>status</td><!--注文ステータス-->
+      </tr>
+  </tbody>
+</table>
+
 <% end %>
-</ul>

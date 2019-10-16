@@ -4,7 +4,10 @@ class OrdersController < ApplicationController
   end
 
   def show
+    #@order_products = current_order
+    #@order = current_order
     @order_products = OrderProduct.where(user_id:current_user.id)
+    #debugger
   end
 
   def new
@@ -13,7 +16,10 @@ class OrdersController < ApplicationController
 
   def create
     @cart_items = CartItem.where(cart_id:current_cart.id)
-    @order = Order.create(order_params)
+    #@order = Order.create(order_params)
+    @order = Order.new(order_params)
+    @order.user_id = current_user.id
+    @order.save
     
     @total_price = 0
     if @cart_items
