@@ -3,7 +3,6 @@ class OrdersController < ApplicationController
   
   def index
     @all_orders = Order.all
-    
   end
 
   def show
@@ -18,6 +17,7 @@ class OrdersController < ApplicationController
     @cart_items = CartItem.where(cart_id:current_cart.id)
     @order = Order.new(order_params)
     @order.user_id = current_user.id
+    @order.email = current_user.email
     @order.save
   
     @total_price = 0
@@ -35,7 +35,6 @@ class OrdersController < ApplicationController
       @order_product.product_id = item.product_id
       @order_product.quantity = item.quantity
       @order_product.price = item.product.price
-      #@order_product.status = 0
       @order_product.save!
     end
     
@@ -73,7 +72,7 @@ class OrdersController < ApplicationController
   private
 
     def order_params
-      params.require(:order).permit(:name, :address, :email)
+      params.require(:order).permit(:name, :address)
     end
     
 end

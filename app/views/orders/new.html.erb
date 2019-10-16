@@ -10,10 +10,7 @@
       <%= f.label :住所 %>
       <%= f.text_area :address, rows: 3, cols: 40 %>
     </div>
-    <div class="field">
-      <%= f.label :メールアドレス %>
-      <%= f.email_field :email, size: 40 %>
-    </div>
+    
   <%= f.submit "注文を確定する", class: 'btn btn-primary', data: { confirm: "本当に注文しますか？" } %>
 </div>
 <% end %>
