@@ -4,7 +4,6 @@
   <h2>注文履歴はありません</h2>
 <% else %>
 
-
 <table class="table table-striped">
   <thead>
     <tr>
@@ -15,32 +14,31 @@
     </tr>
   </thead>
   <tbody>
-      
-      <tr>
-        <% current_user_order.each do |order| %>
-          <% total_price = 0 %>
-          <td><%= order.created_at.strftime('%Y/%m/%d') %></td><!--注文日-->
-          
-          <td><!--注文内容-->
-          <% order.order_products.each do |order_product| %>
-            [商品名:<%= Product.where(id:order_product.product_id).name %>]
-            [商品価格:<%= order_product.price %>円]
-            [購入個数:<%= order_product.quantity %>個]
-            <br>
-          <% end %>
-          </td>
+    <tr>
+      <% current_user_order.each do |order| %>
+        <% total_price = 0 %>
+        <td><%= order.created_at.strftime('%Y/%m/%d') %></td><!--注文日-->
         
-          <td><!--合計金額-->
-          <% order.order_products.each do |order_product| %>
-            <% order_product.price %>
-            <% order_product.quantity %>
-            <% total_price += order_product.price*order_product.quantity %>
-          <% end %>
-          <%= total_price %>円
-          </td>
-        <td><%= order.status %></td><!--注文ステータス-->
-        </tr>
-      <% end %>
+        <td><!--注文内容-->
+        <% order.order_products.each do |order_product| %>
+          [商品名:<%= Product.find(order_product.product_id).name %>]
+          [商品価格:<%= order_product.price %>円]
+          [購入個数:<%= order_product.quantity %>個]
+          <br>
+        <% end %>
+        </td>
+      
+        <td><!--合計金額-->
+        <% order.order_products.each do |order_product| %>
+          <% order_product.price %>
+          <% order_product.quantity %>
+          <% total_price += order_product.price*order_product.quantity %>
+        <% end %>
+        <%= total_price %>円
+        </td>
+      <td><%= order.status %></td><!--注文ステータス-->
+      </tr>
+    <% end %>
   </tbody>
 </table>
 

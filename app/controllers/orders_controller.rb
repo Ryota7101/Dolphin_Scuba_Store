@@ -2,7 +2,6 @@ class OrdersController < ApplicationController
   before_action :ensure_correct_user, {only: [:index]}
   
   def index
-    #@all_order_products = OrderProduct.all
     @all_orders = Order.all
     
   end
@@ -17,7 +16,6 @@ class OrdersController < ApplicationController
 
   def create
     @cart_items = CartItem.where(cart_id:current_cart.id)
-    #@order = Order.create(order_params)
     @order = Order.new(order_params)
     @order.user_id = current_user.id
     @order.save
@@ -25,10 +23,8 @@ class OrdersController < ApplicationController
     @total_price = 0
     if @cart_items
       @cart_items.each do |cart_item|
-        #debugger
         @total_price += cart_item.product.price * cart_item.quantity
       end
-      #debugger
     end
   
     #現在のユーザーのカートの中身をオーダー側へ移す

@@ -11,7 +11,7 @@
   <tbody>
     <%= form_for(@product,url: add_item_path(product_id: @product.id)) do |f| %>
       <tr>
-        <td><%= image_tag(@product.picture_url) if @product.picture.present? %></td>
+        <td text-align:center;><img height="400" src="<%=h @product.picture %>"/></td>
         <td><%= @product.price %>円</td>
         <td><%= f.number_field :quantity, value: 1, class: 'form-control', min: 1 %></td>
         <td><%= f.hidden_field :product_id, value: @product.id %></td>

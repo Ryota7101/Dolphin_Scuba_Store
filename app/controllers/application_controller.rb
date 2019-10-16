@@ -13,7 +13,6 @@ class ApplicationController < ActionController::Base
     end
     
     def current_user_order
-      #debugger
       @current_order = Order.where(user_id:current_user.id)
     end
   

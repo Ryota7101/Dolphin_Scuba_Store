@@ -1,20 +1,17 @@
 class CartsController < ApplicationController
-  before_action :setup_cart_item!, only: [:add_item, :update_item, :delete_item, :show]
+  before_action :setup_cart_item!, only: [:add_item, :update_item, :show]
 
   def show
     @cart_items = CartItem.where(cart_id:current_cart.id)
     @total_price = 0
     if @cart_items
       @cart_items.each do |cart_item|
-        #debugger
         @total_price += cart_item.product.price * cart_item.quantity
       end
-      #debugger
     end
   end
  
   def add_item
-    
     if CartItem.find_by(product_id: params[:product_id], cart_id: current_cart.id).blank?
       #追加した商品が初めてカートに入れるなら、cart_itemsを作成する
       @cart_item = current_cart.cart_items.create(product_id: params[:product_id])
@@ -29,8 +26,6 @@ class CartsController < ApplicationController
     @cart_item.update(quantity: params[:quantity].to_i)
     redirect_to current_cart
   end
-
-  
 
   private
 

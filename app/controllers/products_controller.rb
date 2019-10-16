@@ -17,7 +17,7 @@ class ProductsController < ApplicationController
   
   def create
     @product = Product.new(product_params)
-    if @product.save # => Validation
+    if @product.save
       flash[:success] = "商品を登録しました"
       redirect_to root_url
     else
@@ -67,6 +67,5 @@ class ProductsController < ApplicationController
 
     def product_params
       params.require(:product).permit(:name, :price, :title, :memo, :author, :picture)
-      #params.require(:product).permit(:title, :memo, :author, :picture)
     end
 end

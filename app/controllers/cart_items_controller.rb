@@ -2,7 +2,6 @@ class CartItemsController < ApplicationController
   before_action :setup_item, only: [:destroy]
 
   def destroy
-    #@cart_item.destroy
     CartItem.find(params[:id]).destroy
     redirect_to current_cart
   end
