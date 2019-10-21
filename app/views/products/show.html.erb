@@ -1,7 +1,6 @@
 <!--<form>内にtype="submit"以外の<input>が1つしかない場合、-->
 <!--<input type="submit">の内容は送信されない-->
 <h2><%= @product.name%></h2>
-
 <%= form_for(@product,url: add_item_path(product_id: @product.id)) do |f| %>
   <table class="table table-striped">
     <thead>
