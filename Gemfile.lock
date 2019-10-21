@@ -261,7 +261,7 @@ GEM
     mime-types (3.3)
       mime-types-data (~> 3.2015)
     mime-types-data (3.2019.0904)
-    mini_magick (4.7.0)
+    mini_magick (4.9.4)
     mini_mime (1.0.2)
     mini_portile2 (2.4.0)
     minitest (5.12.2)
@@ -410,7 +410,7 @@ DEPENDENCIES
   jquery-rails (= 4.3.1)
   listen (= 3.0.8)
   mail-iso-2022-jp
-  mini_magick (= 4.7.0)
+  mini_magick (= 4.9.4)
   minitest-reporters (= 1.1.14)
   pg (= 0.18.4)
   puma (= 3.9.1)
