@@ -1,15 +1,17 @@
+<!--<form>内にtype="submit"以外の<input>が1つしかない場合、-->
+<!--<input type="submit">の内容は送信されない-->
 <h2><%= @product.name%></h2>
 
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>商品画像</th>
-      <th>商品価格</th>
-      <th>個数</th>
-    </tr>
-  </thead>
-  <tbody>
-    <%= form_for(@product,url: add_item_path(product_id: @product.id)) do |f| %>
+<%= form_for(@product,url: add_item_path(product_id: @product.id)) do |f| %>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>商品画像</th>
+        <th>商品価格</th>
+        <th>個数</th>
+      </tr>
+    </thead>
+    <tbody>
       <tr>
         <td text-align:center;><img height="400" src="<%=h @product.picture %>"/></td>
         <td><%= @product.price %>円</td>
@@ -17,6 +19,6 @@
         <td><%= f.hidden_field :product_id, value: @product.id %></td>
         <td><%= f.submit 'カートに入れる', class: 'btn btn-success' %></td>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </tbody>
+  </table>
+<% end %>
