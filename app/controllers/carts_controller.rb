@@ -3,12 +3,7 @@ class CartsController < ApplicationController
 
   def show
     @cart_items = CartItem.where(cart_id:current_cart.id)
-    @total_price = 0
-    if @cart_items
-      @cart_items.each do |cart_item|
-        @total_price += cart_item.product.price * cart_item.quantity
-      end
-    end
+    @total_price = @cart_items.calc_total_price(@cart_items)
   end
  
   def add_item

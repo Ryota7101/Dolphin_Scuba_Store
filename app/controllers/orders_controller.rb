@@ -20,22 +20,18 @@ class OrdersController < ApplicationController
     @order.email = current_user.email
     @order.save
   
-    @total_price = 0
-    if @cart_items
-      @cart_items.each do |cart_item|
-        @total_price += cart_item.product.price * cart_item.quantity
-      end
-    end
+    @total_price = @cart_items.calc_total_price(@cart_items)
+    
   
     #現在のユーザーのカートの中身をオーダー側へ移す
     @cart_items.each do |item|
-      @order_product = OrderProduct.create
-      @order_product.order_id = @order.id
-      @order_product.user_id = current_user.id
-      @order_product.product_id = item.product_id
-      @order_product.quantity = item.quantity
-      @order_product.price = item.product.price
-      @order_product.save!
+      order_product = OrderProduct.create
+      order_product.order_id = @order.id
+      order_product.user_id = current_user.id
+      order_product.product_id = item.product_id
+      order_product.quantity = item.quantity
+      order_product.price = item.product.price
+      order_product.save!
     end
     
     #現在のユーザーのカートの中身を削除する
